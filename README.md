@@ -6,7 +6,7 @@
 
 - Screenshots
 
-![gif](screenshots/screenrecord.gif)
+![gif](screenshots/demo.gif)
 
 - Slide
 
