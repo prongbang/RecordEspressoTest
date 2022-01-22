@@ -1,8 +1,6 @@
 # Record Espresso Test
 
-- Project
-
-[https://10.101.33.65/songsitp/recordespressotest.git](https://10.101.33.65/songsitp/recordespressotest.git)
+Training Record Espresso Test
 
 - Screenshots
 

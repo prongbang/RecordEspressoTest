@@ -28,77 +28,97 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class LoginActivityTest {
 
-	@Rule
-	@JvmField
-	var mActivityTestRule = ActivityTestRule(LoginActivity::class.java)
+    @Rule
+    @JvmField
+    var mActivityTestRule = ActivityTestRule(LoginActivity::class.java)
 
-	@Test
-	fun loginActivityTest() {
-		val appCompatEditText = onView(
-                allOf(withId(R.id.username),
-                        childAtPosition(
-                                allOf(withId(R.id.container),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
-                                0),
-                        isDisplayed()))
-		appCompatEditText.perform(click())
+    @Test
+    fun loginActivityTest() {
+        val appCompatEditText = onView(
+            allOf(
+                withId(R.id.username),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.container),
+                        childAtPosition(withId(android.R.id.content), 0)
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatEditText.perform(click())
 
-		val appCompatEditText2 = onView(
-                allOf(withId(R.id.username),
-                        childAtPosition(
-                                allOf(withId(R.id.container),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
-                                0),
-                        isDisplayed()))
-		appCompatEditText2.perform(replaceText("user"), closeSoftKeyboard())
+        val appCompatEditText2 = onView(
+            allOf(
+                withId(R.id.username),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.container),
+                        childAtPosition(withId(android.R.id.content), 0)
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatEditText2.perform(replaceText("user"), closeSoftKeyboard())
 
-		val appCompatEditText3 = onView(
-                allOf(withId(R.id.password),
-                        childAtPosition(
-                                allOf(withId(R.id.container),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
-                                1),
-                        isDisplayed()))
-		appCompatEditText3.perform(replaceText("123456"), closeSoftKeyboard())
+        val appCompatEditText3 = onView(
+            allOf(
+                withId(R.id.password),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.container),
+                        childAtPosition(withId(android.R.id.content), 0)
+                    ),
+                    1
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatEditText3.perform(replaceText("123456"), closeSoftKeyboard())
 
-		val materialButton = onView(
-                allOf(withId(R.id.login), withText("Sign in or register"),
-                        childAtPosition(
-                                allOf(withId(R.id.container),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
-                                2),
-                        isDisplayed()))
-		materialButton.perform(click())
+        val materialButton = onView(
+            allOf(
+                withId(R.id.login), withText("Sign in or register"),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.container),
+                        childAtPosition(withId(android.R.id.content), 0)
+                    ),
+                    2
+                ),
+                isDisplayed()
+            )
+        )
+        materialButton.perform(click())
 
-		val textView = onView(
-                allOf(withId(R.id.welcomeText), withText("Welcome"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()))
-		textView.check(matches(withText("Welcome")))
-	}
+        val textView = onView(
+            allOf(
+                withId(R.id.welcomeText), withText("Welcome"),
+                withParent(withParent(withId(android.R.id.content))),
+                isDisplayed()
+            )
+        )
+        textView.check(matches(withText("Welcome")))
+    }
 
-	private fun childAtPosition(
-            parentMatcher: Matcher<View>, position: Int): Matcher<View> {
+    private fun childAtPosition(
+        parentMatcher: Matcher<View>, position: Int
+    ): Matcher<View> {
 
-		return object : TypeSafeMatcher<View>() {
-			override fun describeTo(description: Description) {
-				description.appendText("Child at position $position in parent ")
-				parentMatcher.describeTo(description)
-			}
+        return object : TypeSafeMatcher<View>() {
+            override fun describeTo(description: Description) {
+                description.appendText("Child at position $position in parent ")
+                parentMatcher.describeTo(description)
+            }
 
-			public override fun matchesSafely(view: View): Boolean {
-				val parent = view.parent
-				return parent is ViewGroup && parentMatcher.matches(parent)
-						&& view == parent.getChildAt(position)
-			}
-		}
-	}
+            public override fun matchesSafely(view: View): Boolean {
+                val parent = view.parent
+                return parent is ViewGroup && parentMatcher.matches(parent)
+                        && view == parent.getChildAt(position)
+            }
+        }
+    }
 }
